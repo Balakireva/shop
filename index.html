@@ -64,13 +64,35 @@
     }
 
     .hero {
-      background-image: url('https://i.imgur.com/mZEFs8T.png');
-      background-size: cover;
-      background-position: center;
-      height: 100vh;
-      position: relative;
-      z-index: 1;
+    height: 100vh;
+    width: 100%;
+    background-image: url('https://i.imgur.com/mZEFs8T.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
     }
+      @media (max-width: 768px) {
+    .hero {
+      background-position: top center;
+    }
+  }
+
+  @media (min-aspect-ratio: 3/2) {
+    .hero {
+      background-position: center center;
+    }
+  }
+
+  @media (max-aspect-ratio: 3/4) {
+    .hero {
+      background-position: top center;
+    }
+  }
 
     .overlay {
       position: absolute;
