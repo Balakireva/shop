@@ -26,8 +26,8 @@
       font-size: 2rem;
       font-weight: 700;
       background: rgba(255, 255, 255, 0.7);
-      position: relative;
       z-index: 2;
+      position: relative;
     }
 
     nav {
@@ -65,23 +65,15 @@
 
     .hero {
       width: 100%;
-      height: 90vh;
-      background-image: url('https://i.imgur.com/mZEFs8T.png'); /* локальный путь */
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center top;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
+      height: 100vh;
+      overflow: hidden;
     }
 
-    @media (max-width: 768px) {
-      .hero {
-        height: auto;
-        aspect-ratio: 3 / 4;
-        background-size: contain;
-      }
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     .section {
@@ -110,14 +102,17 @@
 </head>
 <body>
 
+  <header>BAYER.KG</header>
+  <nav>
+    <a href="#apply">Оформить заявку</a>
+    <a href="#categories">Искать в интернете</a>
+    <a href="#offers">Предложения</a>
+    <a href="#trending">Сейчас в тренде</a>
+  </nav>
+
+  <!-- ✅ Вот наш адаптивный блок с изображением -->
   <div class="hero">
-    <header>BAYER.KG</header>
-    <nav>
-      <a href="#apply">Оформить заявку</a>
-      <a href="#categories">Искать в интернете</a>
-      <a href="#offers">Предложения</a>
-      <a href="#trending">Сейчас в тренде</a>
-    </nav>
+    <img src="https://i.imgur.com/mZEFs8T.png" alt="Главная картинка" />
   </div>
 
   <section class="section" id="apply">
@@ -132,14 +127,4 @@
   </section>
 
   <section class="section" id="offers">
-    <h2>Лучшие предложения</h2>
-    <p>Подборка от стилистов и скидки месяца.</p>
-  </section>
-
-  <section class="section" id="trending">
-    <h2>Сейчас в тренде</h2>
-    <p>Будьте в курсе модных тенденций.</p>
-  </section>
-
-</body>
-</html>
+    <h2>Лучшие п
