@@ -7,13 +7,19 @@
   <style>
     body { margin: 0; font-family: sans-serif; background: #fff; color: #333; }
     header { background: #000; color: #fff; padding: 1rem; text-align: center; }
-    nav { background: #f4f4f4; padding: 0.5rem; text-align: center; }
-    nav a { margin: 0 1rem; text-decoration: none; color: #333; font-weight: bold; }
+    nav { background: #f4f4f4; padding: 0.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+    nav .links a { margin: 0 0.5rem; text-decoration: none; color: #333; font-weight: bold; }
+    nav .search-filter { display: flex; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap; justify-content: center; }
     .hero { background: url('https://source.unsplash.com/1600x600/?fashion') center/cover no-repeat; height: 300px; }
     .products { display: flex; flex-wrap: wrap; gap: 1rem; padding: 1rem; justify-content: center; }
     .product { border: 1px solid #ccc; padding: 1rem; width: 200px; text-align: center; }
     .product img { width: 100%; height: auto; }
+    button { background: #000; color: #fff; padding: 0.5rem 1rem; border: none; cursor: pointer; }
+    button:hover { background: #444; }
     footer { background: #000; color: #fff; text-align: center; padding: 1rem; margin-top: 2rem; }
+    @media (max-width: 600px) {
+      nav { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
@@ -22,31 +28,72 @@
     <p>Модная одежда и аксессуары</p>
   </header>
   <nav>
-    <a href="#">Главная</a>
-    <a href="#">Каталог</a>
-    <a href="#">О нас</a>
-    <a href="#">Контакты</a>
+    <div class="links">
+      <a href="#">Главная</a>
+      <a href="#">Каталог</a>
+      <a href="#">Заявка</a>
+      <a href="#">О нас</a>
+      <a href="#">Контакты</a>
+    </div>
+    <div class="search-filter">
+      <input type="text" id="searchInput" placeholder="Поиск..." />
+      <select id="categoryFilter">
+        <option value="all">Все</option>
+        <option value="clothes">Одежда</option>
+        <option value="shoes">Обувь</option>
+        <option value="bags">Сумки</option>
+      </select>
+    </div>
   </nav>
   <div class="hero"></div>
-  <section class="products">
-    <div class="product">
-      <img src="https://source.unsplash.com/200x200/?clothes" alt="Product" />
+
+  <section class="products" id="productList">
+    <div class="product" data-category="clothes">
+      <img src="https://source.unsplash.com/200x200/?clothes" alt="Футболка" />
       <h3>Футболка</h3>
       <p>1 200₽</p>
+      <button>Купить</button>
     </div>
-    <div class="product">
-      <img src="https://source.unsplash.com/200x200/?shoes" alt="Product" />
+    <div class="product" data-category="shoes">
+      <img src="https://source.unsplash.com/200x200/?shoes" alt="Кроссовки" />
       <h3>Кроссовки</h3>
       <p>4 500₽</p>
+      <button>Купить</button>
     </div>
-    <div class="product">
-      <img src="https://source.unsplash.com/200x200/?bag" alt="Product" />
+    <div class="product" data-category="bags">
+      <img src="https://source.unsplash.com/200x200/?bag" alt="Сумка" />
       <h3>Сумка</h3>
       <p>3 800₽</p>
+      <button>Купить</button>
     </div>
   </section>
+
   <footer>
     &copy; 2025 FashionShop — Все права защищены
   </footer>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const products = document.querySelectorAll(".product");
+
+    function filterProducts() {
+      const searchText = searchInput.value.toLowerCase();
+      const category = categoryFilter.value;
+
+      products.forEach(product => {
+        const name = product.querySelector("h3").textContent.toLowerCase();
+        const productCategory = product.dataset.category;
+
+        const matchSearch = name.includes(searchText);
+        const matchCategory = category === "all" || productCategory === category;
+
+        product.style.display = matchSearch && matchCategory ? "block" : "none";
+      });
+    }
+
+    searchInput.addEventListener("input", filterProducts);
+    categoryFilter.addEventListener("change", filterProducts);
+  </script>
 </body>
 </html>
